@@ -7,8 +7,8 @@
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body>
-  <h1 id="mainHeader" style="text-align:center;">Foundations Module 1 Flashcards</h1>
-  <div id="flashcard" class="card">
+  <h1 style="text-align:center;">Foundations Module 1 Flashcards</h1>
+  <div id="flashcard" class="card" tabindex="-1">
     <div class="card-inner">
       <div class="card-front" aria-hidden="false"></div>
       <div class="card-back" aria-hidden="true"></div>
@@ -59,10 +59,9 @@
       flipped = false;
     }
 
-    function focusHeader() {
-      const header = document.getElementById('mainHeader');
-      header.setAttribute('tabindex', '-1'); // make focusable
-      header.focus();
+    function focusFlashcard() {
+      const flashcard = document.getElementById('flashcard');
+      flashcard.focus();
     }
 
     document.getElementById('flip').onclick = () => {
@@ -81,7 +80,7 @@
         cardBack.setAttribute('aria-hidden', 'false');
         flipped = true;
       }
-      focusHeader(); // move focus to header
+      focusFlashcard(); // move focus to flashcard
     };
 
     document.getElementById('next').onclick = () => {
@@ -101,10 +100,10 @@
           document.querySelector('.controls').style.display = 'block';
           document.getElementById('end').innerHTML = '';
           showCard();
-          focusHeader(); // auto-focus header on restart
+          focusFlashcard(); // auto-focus flashcard on restart
         };
       }
-      focusHeader(); // move focus to header
+      focusFlashcard(); // move focus to flashcard
     };
   </script>
 </body>
