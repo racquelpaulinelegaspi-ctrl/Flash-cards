@@ -14,6 +14,7 @@
       <div class="card-back" aria-hidden="true"></div>
     </div>
   </div>
+  <div id="progress" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
   <div class="controls">
     <button id="flip">Flip</button>
     <button id="back">Back</button>
@@ -60,12 +61,12 @@
       flipped = false;
 
       updateBackButton();
+      updateProgress();
     }
 
     function focusFlashcard() {
       const flashcard = document.getElementById('flashcard');
-      // Use setTimeout to ensure focus happens after DOM updates
-      setTimeout(() => flashcard.focus(), 0);
+      setTimeout(() => flashcard.focus(), 0); // ensure focus after DOM updates
     }
 
     function updateBackButton() {
@@ -75,6 +76,11 @@
       } else {
         backBtn.style.display = 'inline-block';
       }
+    }
+
+    function updateProgress() {
+      const progress = document.getElementById('progress');
+      progress.textContent = `Card ${currentIndex + 1} of ${cards.length}`;
     }
 
     document.getElementById('flip').onclick = () => {
@@ -104,6 +110,7 @@
       } else {
         document.getElementById('flashcard').style.display = 'none';
         document.querySelector('.controls').style.display = 'none';
+        document.getElementById('progress').style.display = 'none';
         document.getElementById('end').innerHTML =
           "<div class='end-message'>🎉 Congratulations! You’ve completed all the flashcards! 🎉</div>" +
           "<div style='text-align:center; margin-top:20px;'><button id='restart'>Restart</button></div>";
@@ -112,6 +119,7 @@
           currentIndex = 0;
           document.getElementById('flashcard').style.display = 'block';
           document.querySelector('.controls').style.display = 'block';
+          document.getElementById('progress').style.display = 'block';
           document.getElementById('end').innerHTML = '';
           showCard();
           focusFlashcard();
@@ -123,7 +131,7 @@
       if (currentIndex > 0) {
         currentIndex--;
         showCard();
-        focusFlashcard(); // focus after DOM update
+        focusFlashcard();
       }
     };
   </script>
