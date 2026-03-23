@@ -16,6 +16,7 @@
   </div>
   <div class="controls">
     <button id="flip">Flip</button>
+    <button id="back">Back</button>
     <button id="next">Next</button>
   </div>
   <div id="end"></div>
@@ -80,7 +81,7 @@
         cardBack.setAttribute('aria-hidden', 'false');
         flipped = true;
       }
-      focusFlashcard(); // move focus to flashcard
+      focusFlashcard();
     };
 
     document.getElementById('next').onclick = () => {
@@ -100,10 +101,18 @@
           document.querySelector('.controls').style.display = 'block';
           document.getElementById('end').innerHTML = '';
           showCard();
-          focusFlashcard(); // auto-focus flashcard on restart
+          focusFlashcard();
         };
       }
-      focusFlashcard(); // move focus to flashcard
+      focusFlashcard();
+    };
+
+    document.getElementById('back').onclick = () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        showCard();
+      }
+      focusFlashcard();
     };
   </script>
 </body>
