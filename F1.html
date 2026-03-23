@@ -35,9 +35,10 @@
         const parsed = Papa.parse(text, { header: false });
         const rows = parsed.data;
 
+        // Use column D (index 3) for front, column E (index 4) for back
         cards = rows.slice(2)
-          .filter(r => r[0] && r[1] && r[0].trim() !== "" && r[1].trim() !== "")
-          .map(r => ({ front: r[0], back: r[1] }));
+          .filter(r => r[3] && r[4] && r[3].trim() !== "" && r[4].trim() !== "")
+          .map(r => ({ front: r[3], back: r[4] }));
 
         if (cards.length > 0) {
           showCard();
@@ -131,7 +132,6 @@
       if (currentIndex > 0) {
         currentIndex--;
         showCard();
-        // Delay focus slightly so it happens after Back button is hidden
         setTimeout(() => {
           focusFlashcard();
         }, 50);
