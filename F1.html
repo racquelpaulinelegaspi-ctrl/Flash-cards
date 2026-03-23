@@ -3,6 +3,8 @@
 <head>
   <title>Foundations Module 1 Flashcards</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Include PapaParse library -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body>
   <h1 style="text-align:center;">Foundations Module 1 Flashcards</h1>
@@ -26,11 +28,12 @@
     // Replace with your published Google Sheet CSV link
     const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT0D3KrPGD0aWICyomVjZwwgx6eZNARFpFIqPgF4H78Bp9_QwZ1RZC6oTqzyl-FrcpEeZdZfa345kCE/pub?output=csv";
 
-    // Load cards from Google Sheet CSV
+    // Load cards from Google Sheet CSV using PapaParse
     fetch(sheetUrl)
       .then(response => response.text())
       .then(text => {
-        const rows = text.split("\n").map(row => row.split(","));
+        const parsed = Papa.parse(text, { header: false });
+        const rows = parsed.data;
         // Skip the first two rows, use Column A (r[0]) as front and Column B (r[1]) as back
         cards = rows.slice(2).map(r => ({ front: r[0], back: r[1] }));
         showCard();
