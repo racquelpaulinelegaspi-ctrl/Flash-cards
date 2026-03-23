@@ -7,7 +7,7 @@
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body>
-  <h1 style="text-align:center;">Foundations Module 1 Flashcards</h1>
+  <h1 id="mainHeader" style="text-align:center;">Foundations Module 1 Flashcards</h1>
   <div id="flashcard" class="card">
     <div class="card-inner">
       <div class="card-front" aria-hidden="false"></div>
@@ -90,7 +90,8 @@
         document.querySelector('.controls').style.display = 'none';
         document.getElementById('end').innerHTML =
           "<div class='end-message'>🎉 Congratulations! You’ve completed all the flashcards! 🎉</div>" +
-          "<div style='text-align:center; margin-top:20px;'><button id='restart'>Restart</button></div>";
+          "<div style='text-align:center; margin-top:20px;'><button id='restart'>Restart</button></div>" +
+          "<div style='text-align:center; margin-top:10px;'><button id='focusHeader'>Back to Header</button></div>";
 
         // Restart functionality
         document.getElementById('restart').onclick = () => {
@@ -99,6 +100,18 @@
           document.querySelector('.controls').style.display = 'block';
           document.getElementById('end').innerHTML = '';
           showCard();
+
+          // Auto-focus header for screen readers
+          const header = document.getElementById('mainHeader');
+          header.setAttribute('tabindex', '-1');
+          header.focus();
+        };
+
+        // Manual "Back to Header" button
+        document.getElementById('focusHeader').onclick = () => {
+          const header = document.getElementById('mainHeader');
+          header.setAttribute('tabindex', '-1');
+          header.focus();
         };
       }
     };
