@@ -23,11 +23,16 @@
     let currentIndex = 0;
     let flipped = false;
 
-    // Load cards from JSON file
-    fetch('F1.json')
-      .then(response => response.json())
-      .then(data => {
-        cards = data;
+    // Replace with your published Google Sheet CSV link
+    const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT0D3KrPGD0aWICyomVjZwwgx6eZNARFpFIqPgF4H78Bp9_QwZ1RZC6oTqzyl-FrcpEeZdZfa345kCE/pub?output=csv";
+
+    // Load cards from Google Sheet CSV
+    fetch(sheetUrl)
+      .then(response => response.text())
+      .then(text => {
+        const rows = text.split("\n").map(row => row.split(","));
+        // Skip the first two rows, use Column A (r[0]) as front and Column B (r[1]) as back
+        cards = rows.slice(2).map(r => ({ front: r[0], back: r[1] }));
         showCard();
       });
 
@@ -73,7 +78,7 @@
           "<div class='end-message'>🎉 Congratulations! You’ve completed all the flashcards! 🎉</div>" +
           "<div style='text-align:center; margin-top:20px;'><button id='restart'>Restart</button></div>";
 
-        // Add restart functionality
+        // Restart functionality
         document.getElementById('restart').onclick = () => {
           currentIndex = 0;
           document.getElementById('flashcard').style.display = 'block';
