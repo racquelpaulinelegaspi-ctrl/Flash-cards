@@ -64,7 +64,8 @@
 
     function focusFlashcard() {
       const flashcard = document.getElementById('flashcard');
-      flashcard.focus();
+      // Use setTimeout to ensure focus happens after DOM updates
+      setTimeout(() => flashcard.focus(), 0);
     }
 
     function updateBackButton() {
@@ -122,7 +123,7 @@
       if (currentIndex > 0) {
         currentIndex--;
         showCard();
-        focusFlashcard(); // ensure focus happens after showCard updates button visibility
+        focusFlashcard(); // focus after DOM update
       }
     };
   </script>
