@@ -8,8 +8,8 @@
   <h1 style="text-align:center;">Foundations Module 1 Flashcards</h1>
   <div id="flashcard" class="card">
     <div class="card-inner">
-      <div class="card-front"></div>
-      <div class="card-back"></div>
+      <div class="card-front" aria-hidden="false"></div>
+      <div class="card-back" aria-hidden="true"></div>
     </div>
   </div>
   <div class="controls">
@@ -36,17 +36,28 @@
       const cardBack = document.querySelector('.card-back');
       cardFront.textContent = cards[currentIndex].front;
       cardBack.textContent = cards[currentIndex].back;
+
+      // Reset to front view
       document.querySelector('.card-inner').style.transform = 'rotateY(0deg)';
-      flipped = false; // reset to front
+      cardFront.setAttribute('aria-hidden', 'false');
+      cardBack.setAttribute('aria-hidden', 'true');
+      flipped = false;
     }
 
     document.getElementById('flip').onclick = () => {
       const cardInner = document.querySelector('.card-inner');
+      const cardFront = document.querySelector('.card-front');
+      const cardBack = document.querySelector('.card-back');
+
       if (flipped) {
         cardInner.style.transform = 'rotateY(0deg)';
+        cardFront.setAttribute('aria-hidden', 'false');
+        cardBack.setAttribute('aria-hidden', 'true');
         flipped = false;
       } else {
         cardInner.style.transform = 'rotateY(180deg)';
+        cardFront.setAttribute('aria-hidden', 'true');
+        cardBack.setAttribute('aria-hidden', 'false');
         flipped = true;
       }
     };
@@ -65,4 +76,3 @@
   </script>
 </body>
 </html>
-  
