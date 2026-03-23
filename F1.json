@@ -1,0 +1,14 @@
+[
+  {
+    "front": "Which unique identifier is used when contacting Salesforce Support for assistance with an organization?",
+    "back": "Organization ID"
+  },
+  {
+    "front": "The formatting of dates, times, and numbers across a Salesforce org is controlled by the _____.",
+    "back": "default locale"
+  },
+  {
+    "front": "What information does Salesforce provide regarding user licenses on the Company Information page?",
+    "back": "The number of licenses purchased and the number currently in use."
+  }
+]
