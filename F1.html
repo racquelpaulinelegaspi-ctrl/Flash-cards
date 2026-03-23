@@ -70,7 +70,17 @@
         document.getElementById('flashcard').style.display = 'none';
         document.querySelector('.controls').style.display = 'none';
         document.getElementById('end').innerHTML =
-          "<div class='end-message'>🎉 Congratulations! You’ve completed all the flashcards! 🎉</div>";
+          "<div class='end-message'>🎉 Congratulations! You’ve completed all the flashcards! 🎉</div>" +
+          "<div style='text-align:center; margin-top:20px;'><button id='restart'>Restart</button></div>";
+
+        // Add restart functionality
+        document.getElementById('restart').onclick = () => {
+          currentIndex = 0;
+          document.getElementById('flashcard').style.display = 'block';
+          document.querySelector('.controls').style.display = 'block';
+          document.getElementById('end').innerHTML = '';
+          showCard();
+        };
       }
     };
   </script>
