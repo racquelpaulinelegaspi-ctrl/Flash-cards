@@ -40,6 +40,7 @@
 
         if (cards.length > 0) {
           showCard();
+          updateBackButton();
         } else {
           document.getElementById('flashcard').style.display = 'none';
           document.querySelector('.controls').style.display = 'none';
@@ -58,11 +59,21 @@
       cardFront.setAttribute('aria-hidden', 'false');
       cardBack.setAttribute('aria-hidden', 'true');
       flipped = false;
+      updateBackButton();
     }
 
     function focusFlashcard() {
       const flashcard = document.getElementById('flashcard');
       flashcard.focus();
+    }
+
+    function updateBackButton() {
+      const backBtn = document.getElementById('back');
+      if (currentIndex === 0) {
+        backBtn.style.display = 'none';
+      } else {
+        backBtn.style.display = 'inline-block';
+      }
     }
 
     document.getElementById('flip').onclick = () => {
