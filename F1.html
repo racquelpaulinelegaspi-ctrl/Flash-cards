@@ -34,9 +34,20 @@
       .then(text => {
         const parsed = Papa.parse(text, { header: false });
         const rows = parsed.data;
-        // Skip the first two rows, use Column A (r[0]) as front and Column B (r[1]) as back
-        cards = rows.slice(2).map(r => ({ front: r[0], back: r[1] }));
-        showCard();
+
+        // Skip the first two rows, filter out empty or whitespace-only rows
+        cards = rows.slice(2)
+          .filter(r => r[0] && r[1] && r[0].trim() !== "" && r[1].trim() !== "")
+          .map(r => ({ front: r[0], back: r[1] }));
+
+        if (cards.length > 0) {
+          showCard();
+        } else {
+          document.getElementById('flashcard').style.display = 'none';
+          document.querySelector('.controls').style.display = 'none';
+          document.getElementById('end').innerHTML =
+            "<div class='end-message'>⚠️ No valid flashcards found in your sheet.</div>";
+        }
       });
 
     function showCard() {
